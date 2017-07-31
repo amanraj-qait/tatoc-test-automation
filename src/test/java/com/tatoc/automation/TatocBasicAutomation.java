@@ -4,10 +4,10 @@ import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
 
 import com.tatoc.util.Pathreader;
 
-//import com.tatoc.util.Pathreader;
 
 public class TatocBasicAutomation {
 	private WebDriver driver;
@@ -24,10 +24,12 @@ public class TatocBasicAutomation {
 		driver.manage().window().maximize();
 	}
 
+	@Test(priority = 1)
 	public void automateGrid() throws Exception {
 		driver.findElement(data.getLocator("green_grid")).click();
 	}
 
+	@Test(priority = 2)
 	public void automateFrameDungeon() throws Exception {
 		Thread.sleep(2000);
 		driver.switchTo().frame("main");
@@ -48,6 +50,7 @@ public class TatocBasicAutomation {
 		driver.findElement(data.getLocator("proceed")).click();
 	}
 
+	@Test(priority = 3)
 	public void automateDragAround() throws Exception {
 		WebElement box = driver.findElement(data.getLocator("box_value"));
 		WebElement field = driver.findElement(data.getLocator("field_value"));
@@ -57,6 +60,7 @@ public class TatocBasicAutomation {
 		driver.findElement(data.getLocator("proceed")).click();
 	}
 
+	@Test(priority = 4)
 	public void automatePopupWindow() throws Exception {
 		Thread.sleep(2000);
 		String winHandleBefore = driver.getWindowHandle();
@@ -72,6 +76,7 @@ public class TatocBasicAutomation {
 		driver.findElement(data.getLocator("proceed")).click();
 	}
 
+	@Test(priority = 5)
 	public void automateTokenGenerate() throws Exception {
 		Thread.sleep(2000);
 		driver.findElement(data.getLocator("token")).click();
@@ -81,14 +86,5 @@ public class TatocBasicAutomation {
 		driver.manage().addCookie(newcookie);
 		Thread.sleep(1000);
 		driver.findElement(data.getLocator("proceed")).click();
-	}
-
-	public static void main(String as[]) throws Exception {
-		TatocBasicAutomation td = new TatocBasicAutomation();
-		td.automateGrid();
-		td.automateFrameDungeon();
-		td.automateDragAround();
-		td.automatePopupWindow();
-		td.automateTokenGenerate();
 	}
 }

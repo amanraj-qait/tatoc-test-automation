@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Test;
 
 import com.jayway.restassured.RestAssured;
 import com.tatoc.util.Pathreader;
@@ -39,6 +40,7 @@ public class TatocAdvancedAutomation {
 		driver.manage().window().maximize();
 	}
 
+	@Test(priority = 1)
 	public void automateHoverMenu() throws Exception {
 		Actions action = new Actions(driver);
 		WebElement menu = driver.findElement(data.getLocator("menu"));
@@ -46,6 +48,7 @@ public class TatocAdvancedAutomation {
 				.perform();
 	}
 
+	@Test(priority=2)
 	public void automateQueryGate() throws Exception {
 		String symbol = driver.findElement(data.getLocator("symbol")).getText();
 		Class.forName("com.mysql.jdbc.Driver");
@@ -75,6 +78,7 @@ public class TatocAdvancedAutomation {
 	 * driver.findElement(By.cssSelector("object#OoFlashhwp40h_internal")).click
 	 * (); }
 	 */
+	@Test(priority=1)
 	public void automateRestful() throws Exception {
 		driver.get("http://10.0.1.86/tatoc/advanced/rest/#");
 		String session = driver.findElement(data.getLocator("session_id")).getText();
@@ -90,6 +94,7 @@ public class TatocAdvancedAutomation {
 		driver.findElement(data.getLocator("proceed")).click();
 	}
 
+	@Test(priority=3)
 	public void automateReadFile() throws Exception {
 		File file = new File(System.getProperty("user.home") + File.separator + "Downloads" + File.separator
 				+ "file_handle_test.dat");
@@ -105,13 +110,5 @@ public class TatocAdvancedAutomation {
 		driver.findElement(data.getLocator("input")).sendKeys(signature);
 		driver.findElement(data.getLocator("submit_sig")).click();
 
-	}
-
-	public static void main(String as[]) throws Exception {
-		TatocAdvancedAutomation td = new TatocAdvancedAutomation();
-		td.automateHoverMenu();
-		td.automateQueryGate();
-		td.automateRestful();
-		td.automateReadFile();
 	}
 }
